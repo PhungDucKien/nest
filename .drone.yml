@@ -12,6 +12,7 @@ steps:
     restore: true
     bucket: dronereviewer
     region: ap-southeast-1
+    cache_key: '{{ checksum "package.json" }}'
     mount:
       - 'node_modules'
 
@@ -30,5 +31,6 @@ steps:
     rebuild: true
     bucket: dronereviewer
     region: ap-southeast-1
+    cache_key: '{{ checksum "package.json" }}'
     mount:
       - 'node_modules'
