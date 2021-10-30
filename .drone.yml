@@ -13,6 +13,7 @@ steps:
     bucket: dronereviewer
     region: ap-southeast-1
     cache_key: '{{ checksum "package.json" }}'
+    archive_format: "gzip"
     mount:
       - 'node_modules'
 
@@ -32,5 +33,6 @@ steps:
     bucket: dronereviewer
     region: ap-southeast-1
     cache_key: '{{ checksum "package.json" }}'
+    archive_format: "gzip"
     mount:
       - 'node_modules'
