@@ -2,25 +2,33 @@ kind: pipeline
 name: default
 
 steps:
-- name: restore
-  image: plugins/s3-cache
+- name: restore-cache
+  image: meltwater/drone-cache:dev
+  environment:
+    AWS_ACCESS_KEY_ID: AKIA6DTKFYKBN7LY7GQ6
+    AWS_SECRET_ACCESS_KEY: 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
+  pull: true
   settings:
-    pull: true
-    access_key: AKIA6DTKFYKBN7LY7GQ6
-    secret_key: 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
     restore: true
+    bucket: dronereviewer
+    region: ap-southeast-1
+    mount:
+      - 'node_modules'
 
 - name: install
   image: node
   commands:
   - npm install
 
-- name: rebuild
-  image: plugins/s3-cache
+- name: rebuild-cache
+  image: meltwater/drone-cache:dev
+  pull: true
+  environment:
+    AWS_ACCESS_KEY_ID: AKIA6DTKFYKBN7LY7GQ6
+    AWS_SECRET_ACCESS_KEY: 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
   settings:
-    pull: true
-    access_key: AKIA6DTKFYKBN7LY7GQ6
-    secret_key: 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
     rebuild: true
+    bucket: dronereviewer
+    region: ap-southeast-1
     mount:
-      - node_modules
+      - 'node_modules'
