@@ -1,27 +1,9 @@
 kind: pipeline
-type: docker
 name: default
 
 steps:
-- name: restore-cache
-  image: drillster/drone-volume-cache
-  restore: true
-  mount:
-  - ./node_modules
-  volumes:
-  - /tmp/cache:/cache
-
-- name: install
-  image: node:8.6.0
+- name: test
+  image: node
   commands:
-  - node -v
-  - npm -v
   - npm install
-
-- name: rebuild-cache
-  image: drillster/drone-volume-cache
-  rebuild: true
-  mount:
-  - ./node_modules
-  volumes:
-  - /tmp/cache:/cache
+  - npm test
